@@ -4,7 +4,7 @@ import inspect
 import os
 
 def my_assert(a, b):
-	if not a is b:
+	if a != b:
 		frame = inspect.stack()[1]
 		#caller_file_name = os.path.basename(frame.filename)
 		caller_file_name = frame.filename

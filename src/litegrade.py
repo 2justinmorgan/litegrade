@@ -7,9 +7,9 @@
 import json
 
 from importlib import reload
-import commondriver
-commondriver = reload(commondriver)
-from commondriver import print_err, safe_fopen
+import modulemanager
+modulemanager = reload(modulemanager)
+from modulemanager import print_err, safe_fopen, hello_from_qdriver
 
 def load_questions(json_fname):
 
@@ -23,6 +23,9 @@ def load_questions(json_fname):
 
 	return questions_obj
 
+hello_from_qdriver({})
+#def mutate_question():
+	#questions_obj = load_questions("questions.json")
 
 
 

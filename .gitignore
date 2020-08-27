@@ -9,3 +9,4 @@ __pycache__
 test/commondriver.py
 test/litegrade.py
 test/questiondriver.py
+test/modulemanager.py

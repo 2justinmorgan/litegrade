@@ -1,3 +1,11 @@
 
 __pycache__
 *.pyc
+
+# swap files
+*.swp
+
+# sym links to src/
+test/commondriver.py
+test/litegrade.py
+test/questiondriver.py

@@ -4,16 +4,23 @@ dir_of_code_to_test = "/home/jmorga27/Cal_Poly/Kurfess/litegrade/src"
 
 import os
 import sys
-sys.path.insert(1, dir_of_code_to_test)
-current_dir = os.path.dirname(os.path.realpath(__file__))
+
+#sys.path.insert(1, dir_of_code_to_test)
+#current_dir = os.path.dirname(os.path.realpath(__file__))
 
 import inspect
 from unittesting import my_assert
 
 from importlib import reload
 import litegrade
+import questiondriver
+#import commondriver
 litegrade = reload(litegrade)
+questiondriver = reload(questiondriver)
+#commondriver = reload(commondriver)
 from litegrade import load_questions
+from questiondriver import get_nested_value
+#from commondriver import *
 
 msg_prefix = "testing"
 
@@ -28,7 +35,7 @@ def print_err(msg, **kwargs):
 	
 def load_questions_tests():
 	questions_fname = "questions.json"
-	questions_obj = {
+	expected_questions_obj = {
 		"questions": {
 			"apples_question": {
 				"question_type": "multiple-choice",
@@ -86,10 +93,154 @@ def load_questions_tests():
 	if not os.path.isfile(questions_fname):
 		print_err(f"'"+questions_fname+"' not found", callback=lambda: None)
 	
-	my_assert(load_questions(questions_fname), questions_obj)
+	my_assert(load_questions(questions_fname), expected_questions_obj)
+
+def get_nested_value_tests():
+
+	# def get_nested_value(nested_keys_and_indices_arr, obj):
+	# return target_value
+
+	# Test 1
+	input_obj = {
+		"keyA": "valA",
+		"keyB": {
+			"keyBA": "valBA"
+		},
+		"keyC": "valC"
+	}
+	nested_keys_and_indices_arr = ["keyB"]
+	expected_value = {"keyBA": "valBA"}
+
+	my_assert( \
+		get_nested_value(nested_keys_and_indices_arr, input_obj), \
+		expected_value)
+
+	# Test 2
+	input_obj = {
+		"keyA": "valA",
+		"keyB": {
+			"keyBA": "valBA"
+		},
+		"keyC": "valC"
+	}
+	nested_keys_and_indices_arr = ["keyB", "keyBA"]
+	expected_value = "valBA"
+
+	my_assert( \
+		get_nested_value(nested_keys_and_indices_arr, input_obj), \
+		expected_value)
+
+	# Test 3
+	input_obj = {
+		"keyA": "valA",
+		"keyB": {
+			"keyBA": "valBA"
+		},
+		"keyC": {
+			"keyCA": {
+				"keyCAA": "valCAA",
+				"keyCAB": [2, 5, 4]
+			}
+		}
+	}
+	nested_keys_and_indices_arr = ["keyC", "keyCA", "keyCAB"]
+	expected_value = [2, 5, 4]
+
+	my_assert( \
+		get_nested_value(nested_keys_and_indices_arr, input_obj), \
+		expected_value)
+
+	# Test 4
+	input_obj = {
+		"keyA": "valA",
+		"keyB": {
+			"keyBA": "valBA"
+		},
+		"keyC": {
+			"keyCA": {
+				"keyCAA": "valCAA",
+				"keyCAB": [2, 5, 4]
+			}
+		}
+	}
+	nested_keys_and_indices_arr = []
+	expected_value = input_obj
+
+	my_assert( \
+		get_nested_value(nested_keys_and_indices_arr, input_obj), \
+		expected_value)
+
+	# Test 5
+	input_obj = {
+		"keyA": "valA",
+		"keyB": {
+			"keyBA": "valBA"
+		},
+		"keyC": {
+			"keyCA": {
+				"keyCAA": "valCAA",
+				"keyCAB": [2, 5, 4]
+			}
+		}
+	}
+	nested_keys_and_indices_arr = ["keyC", "keyCD", "keyCAA"]
+	expected_value = {}
+
+	my_assert( \
+		get_nested_value(nested_keys_and_indices_arr, input_obj), \
+		expected_value)
+
+	# Test 6
+	input_obj = {
+		"keyA": "valA",
+		"keyB": {
+			"keyBA": "valBA"
+		},
+		"keyC": {
+			"keyCA": [
+				{
+					"keyCAA": "valCAA"
+				},
+				{
+					"keyCAB": [8, 3, 9]
+				}
+			]
+		}
+	}
+	nested_keys_and_indices_arr = ["keyC", "keyCA", 1 ,"keyCAB"]
+	expected_value = [8, 3, 9]
+
+	my_assert( \
+		get_nested_value(nested_keys_and_indices_arr, input_obj), \
+		expected_value)
+
+	# Test 7
+	input_obj = {
+		"keyA": "valA",
+		"keyB": {
+			"keyBA": "valBA"
+		},
+		"keyC": {
+			"keyCA": [
+				{
+					"keyCAA": "valCAA"
+				},
+				{
+					"keyCAB": [8, 3, 9]
+				}
+			]
+		}
+	}
+	nested_keys_and_indices_arr = ["keyC", "keyCA", 1 ,"keyCAZ"]
+	expected_value = {}
+
+	my_assert( \
+		get_nested_value(nested_keys_and_indices_arr, input_obj), \
+		expected_value)
 
 def main():
 	load_questions_tests()
+	get_nested_value_tests()
 
 main()
 

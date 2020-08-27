@@ -24,6 +24,7 @@ def get_nested_value(nested_keys_and_indices_arr, obj):
 	return target_value
 	
 def hello_from_qdriver(obj):
-	nested_element = get_nested_value(["keyB","key_BB"], obj)
+	nested_element = get_nested_value(["keyB",1], obj)
+	nested_element.update(key_BB = "New value added")
 	
 

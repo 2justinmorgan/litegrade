@@ -19,7 +19,7 @@ litegrade = reload(litegrade)
 questiondriver = reload(questiondriver)
 #commondriver = reload(commondriver)
 from litegrade import load_questions
-from questiondriver import get_nested_value
+from questiondriver import get_nested_value, hello_from_qdriver
 #from commondriver import *
 
 msg_prefix = "testing"
@@ -238,9 +238,49 @@ def get_nested_value_tests():
 		get_nested_value(nested_keys_and_indices_arr, input_obj), \
 		expected_value)
 
+def hello_from_qdriver_tests():
+
+	# def hello_from_qdriver(obj):
+	# (no return)
+
+	input_obj = {
+		"keyA": "valA",
+		"keyB": [
+			{
+				"key_BA": "val_BA"
+			},
+			{
+				"key_BB": "valBB"
+			}
+		],
+		"keyC": {
+			"keyCA": "valCA"
+		}
+	}
+
+	expected_obj = {
+		"keyA": "valA",
+		"keyB": [
+			{
+				"key_BA": "val_BA"
+			},
+			{
+				"key_BB": "New value added"
+			}
+		],
+		"keyC": {
+			"keyCA": "valCA"
+		}
+	}
+
+	hello_from_qdriver(input_obj)
+	my_assert(input_obj, expected_obj)
+
 def main():
 	load_questions_tests()
 	get_nested_value_tests()
+	hello_from_qdriver_tests()
+	print("main end")
 
 main()
 

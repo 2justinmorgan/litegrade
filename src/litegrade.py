@@ -23,9 +23,8 @@ def load_questions(json_fname):
 
 	return questions_obj
 
-hello_from_qdriver({})
-#def mutate_question():
-	#questions_obj = load_questions("questions.json")
+def mutate_question(questions_obj):
+	hello_from_qdriver({},[questions_obj])
 
 
 

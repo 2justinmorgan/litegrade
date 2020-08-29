@@ -14,4 +14,3 @@ from litegrade import begin
 
 student = begin("assignment A")
 
-print(student)

@@ -56,7 +56,8 @@ def init_student(assignment_name):
 			"last": last_name},
 		"id": id_number,
 		"assignment": assignment_name, #questions_obj}#init_assignment(assignment_name)}
-		"questions": []
+		"questions": load_questions("questions.json"),
+		"student_answers": []
 	}
 	return student_obj
 

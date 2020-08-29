@@ -14,6 +14,6 @@ from litegrade import begin, ask
 
 student = begin("assignment A")
 
-#ask(student, "apples_question")
-ask(student, "cleverness_question")
+ask(student, "apples_question")
+#ask(student, "cleverness_question")
 

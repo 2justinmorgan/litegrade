@@ -72,8 +72,8 @@ def begin(assignment_name):
 def print_question(question_type, prompt, choices, choices_labels):
 
 	if question_type == "true-or-false":
-		print(f"{prompt} ('T' or 'F')")
-		return
+		print(f"{prompt}")
+		return get_input("Please enter your answer: ", choices_labels)
 
 	print(f"{prompt}")
 	choice_num = 0
@@ -82,18 +82,23 @@ def print_question(question_type, prompt, choices, choices_labels):
 		choice_label = choices_labels[choice_num]
 		print(f"  {choice_label}) {description}")
 		choice_num += 1
+	return get_input("Please enter your answer: ", choices_labels)
 
 def get_choices_labels(question_type, number_of_choices):
 	letters = ['A','B','C','D','E','F','G','H']
 
-	choices_labels = []
+	choices_labels = [None] * number_of_choices
 	if question_type == "multiple-choice":
-		for letter in letters:
-			choices_labels.append(letter)
+		for choice_num in range(number_of_choices):
+			choices_labels[choice_num] = letters[choice_num]
 	if question_type == "true-or-false":
-		choices_labels = ["True", "False"]
+		choices_labels = ["T", "True", "F", "False"]
 	
 	return choices_labels
+
+def record_student_answer(question_name, student_answer, student_obj):
+	student_answers = get_nested_value(["student_answers"], student_obj)
+	student_answers.append([question_name, student_answer])
 	
 def ask(student_obj, question_name):
 	questions = get_nested_value(["questions"], student_obj)
@@ -104,7 +109,10 @@ def ask(student_obj, question_name):
 	choices = get_nested_value(["choices"], question)
 	question_type = get_nested_value(["question_type"], question)
 	choices_labels = get_choices_labels(question_type, len(choices))
-	print_question(question_type, prompt, choices, choices_labels)
+	student_answer = \
+		print_question(question_type, prompt, choices, choices_labels)
+
+	record_student_answer(question_name, student_answer, student_obj)
 
 
 

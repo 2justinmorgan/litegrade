@@ -84,7 +84,7 @@ def load_questions_tests():
 			"cleverness_question": {
 				"question_type": "true-or-false",
 				"prompt": "Are these questions clever?",
-				"correct_answer": "true",
+				"correct_choice": "true",
 				"explaination": "They're so good, an explaination is not needed"
 			}
 		}
@@ -413,7 +413,7 @@ def mutate_question_tests():
 			"cleverness_question": {
 				"question_type": "true-or-false",
 				"prompt": "Are these questions clever?",
-				"correct_answer": "true",
+				"correct_choice": "true",
 				"explaination": "They're so good, an explaination is not needed"
 			}
 		}

@@ -36,7 +36,8 @@ def get_input(msg, valid_inputs_list):
 	if not valid_inputs_list:
 		return user_input
 
-	while user_input not in valid_inputs_list:
+	lower_valid_inputs_list = [x.lower() for x in valid_inputs_list]
+	while user_input.lower() not in lower_valid_inputs_list:
 		print(f"  '{user_input}' is not a valid input")
 		print(f"  valid inputs include {valid_inputs_list}")
 		user_input = input(msg)
@@ -52,7 +53,7 @@ def hello_from_litegrade():
 def init_student(assignment_name):
 	print("Please enter your name below")
 	first_name = get_input("First Name: ", [])
-	last_name = get_input("Last Name: ", ["a", "b"])
+	last_name = get_input("Last Name: ", [])
 	id_number = "" #input("ID Number: ")
 	student_obj = {
 		"name": {
@@ -92,7 +93,7 @@ def get_choices_labels(question_type, number_of_choices):
 		for choice_num in range(number_of_choices):
 			choices_labels[choice_num] = letters[choice_num]
 	if question_type == "true-or-false":
-		choices_labels = ["T", "True", "F", "False"]
+		choices_labels = ["true","false","t","f"]
 	
 	return choices_labels
 
@@ -109,10 +110,27 @@ def ask(student_obj, question_name):
 	choices = get_nested_value(["choices"], question)
 	question_type = get_nested_value(["question_type"], question)
 	choices_labels = get_choices_labels(question_type, len(choices))
+
 	student_answer = \
 		print_question(question_type, prompt, choices, choices_labels)
+	correct_answer_index = get_nested_value(["correct_choice"], question)
+	correct_answer = choices_labels[correct_answer_index]
+	print(correct_answer)
+	
+	if student_answer.lower() == correct_answer.lower():
+		print(f"'{student_answer}' is correct!")
+	else:
+		student_try_again_answer = \
+			get_input(f"'{student_answer}' is incorrect. " \
+				"Would like to give it another try? (y or n) ", \
+				["yes", "y", "no", "n"])
+		if "y" in student_try_again_answer:
+			print(" ")
+			ask(student_obj, question_name)
+			return
 
 	record_student_answer(question_name, student_answer, student_obj)
+
 
 
 

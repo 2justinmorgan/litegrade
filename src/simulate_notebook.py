@@ -7,7 +7,11 @@
 from importlib import reload
 import litegrade
 litegrade = reload(litegrade)
-#from litegrade import begin, ask
-from litegrade import hello_from_litegrade
+from litegrade import begin
+#from litegrade import hello_from_litegrade
 
-hello_from_litegrade()
+#hello_from_litegrade()
+
+student = begin("assignment A")
+
+print(student)

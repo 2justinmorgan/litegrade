@@ -29,4 +29,26 @@ def mutate_question(questions_obj):
 def hello_from_litegrade():
 	print("hello from litegrade function")
 
+def init_student(assignment_name):
+	print("Please enter your name below")
+	first_name = input("First Name: ")
+	last_name = input("Last Name: ")
+	id_number = "" #input("ID Number: ")
+	student_obj = {
+		"name": {
+			"first": first_name,
+			"last": last_name},
+		"id": id_number,
+		"assignment": assignment_name, #questions_obj}#init_assignment(assignment_name)}
+		"questions": []
+	}
+	return student_obj
+
+def begin(assignment_name):
+	student_obj = init_student(assignment_name)
+	return student_obj
+
+
+
+
 

@@ -10,4 +10,4 @@ import questiondriver
 commondriver = reload(commondriver)
 questiondriver = reload(questiondriver)
 from commondriver import print_err, safe_fopen
-from questiondriver import hello_from_qdriver
+from questiondriver import hello_from_qdriver, get_nested_value

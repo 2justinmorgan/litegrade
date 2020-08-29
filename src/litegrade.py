@@ -9,7 +9,11 @@ import json
 from importlib import reload
 import modulemanager
 modulemanager = reload(modulemanager)
-from modulemanager import print_err, safe_fopen, hello_from_qdriver
+from modulemanager import \
+	print_err, \
+	safe_fopen, \
+	hello_from_qdriver, \
+	get_nested_value
 
 def load_questions(json_fname):
 
@@ -64,6 +68,49 @@ def init_student(assignment_name):
 def begin(assignment_name):
 	student_obj = init_student(assignment_name)
 	return student_obj
+
+def print_question(question_type, prompt, choices, choices_labels):
+
+	if question_type == "true-or-false":
+		print(f"{prompt} ('T' or 'F')")
+		return
+
+	print(f"{prompt}")
+	choice_num = 0
+	for choice in choices:
+		description = get_nested_value(["description"], choice)
+		choice_label = choices_labels[choice_num]
+		print(f"  {choice_label}) {description}")
+		choice_num += 1
+
+def get_choices_labels(question_type, number_of_choices):
+	letters = ['A','B','C','D','E','F','G','H']
+
+	choices_labels = []
+	if question_type == "multiple-choice":
+		for letter in letters:
+			choices_labels.append(letter)
+	if question_type == "true-or-false":
+		choices_labels = ["True", "False"]
+	
+	return choices_labels
+	
+def ask(student_obj, question_name):
+	questions = get_nested_value(["questions"], student_obj)
+	question = get_nested_value( \
+		["questions", question_name], questions)
+
+	prompt = get_nested_value(["prompt"], question)
+	choices = get_nested_value(["choices"], question)
+	question_type = get_nested_value(["question_type"], question)
+	choices_labels = get_choices_labels(question_type, len(choices))
+	print_question(question_type, prompt, choices, choices_labels)
+
+
+
+
+
+
 
 
 

@@ -75,7 +75,7 @@ def print_question(question_type, prompt, choices, choices_labels):
 
 	if question_type == "true-or-false":
 		print(f"{prompt}")
-		return get_input("Please enter your answer: ", choices_labels)
+		return get_input("Please enter your answer:\n  ", choices_labels)
 
 	print(f"{prompt}")
 	choice_num = 0
@@ -84,7 +84,7 @@ def print_question(question_type, prompt, choices, choices_labels):
 		choice_label = choices_labels[choice_num]
 		print(f"  {choice_label}) {description}")
 		choice_num += 1
-	return get_input("Please enter your answer: ", choices_labels)
+	return get_input("Please enter your answer:\n  ", choices_labels)
 
 def get_choices_labels(question_type, number_of_choices):
 	letters = ['A','B','C','D','E','F','G','H']
@@ -116,19 +116,25 @@ def ask(student_obj, question_name):
 		print_question(question_type, prompt, choices, choices_labels)
 	correct_answer_index = get_nested_value(["correct_choice"], question)
 	correct_answer = choices_labels[correct_answer_index]
-	print(correct_answer)
+
+	# hotfix
+	if question_type == "true-or-false":
+		correct_answer = "t" if correct_answer_index == 0 else "f"
 	
-	if student_answer.lower() == correct_answer.lower():
+	if correct_answer.lower() in student_answer.lower():
 		print(f"'{student_answer}' is correct!")
 	else:
-		student_try_again_answer = \
-			get_input(f"'{student_answer}' is incorrect. " \
-				"Would like to give it another try? (y or n) ", \
-				["yes", "y", "no", "n"])
-		if "y" in student_try_again_answer:
-			print(" ")
-			ask(student_obj, question_name)
-			return
+		print(f"  '{student_answer}' is incorrect\n")
+		ask(student_obj, question_name)
+		return
+		#student_try_again_answer = \
+		#	get_input(f"'{student_answer}' is incorrect. " \
+		#		"Would like to give it another try? (y or n)\n  ", \
+		#		["yes", "y", "no", "n"])
+		#if "y" in student_try_again_answer:
+		#	print(" ")
+		#	ask(student_obj, question_name)
+		#	return
 
 	record_student_answer(question_name, student_answer, student_obj)
 

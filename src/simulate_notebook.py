@@ -16,6 +16,7 @@ student = begin("assignment A")
 
 ask(student, "apples_question")
 #ask(student, "cleverness_question")
+ask(student, "Vertex Representation")
 
 handin("assignment A", student)
 

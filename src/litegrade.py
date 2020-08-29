@@ -23,6 +23,22 @@ def load_questions(json_fname):
 
 	return questions_obj
 
+def get_input(msg, valid_inputs_list):
+	user_input = input(msg)
+	while not user_input:
+		print("  Please enter something")
+		user_input = input(msg)
+	
+	if not valid_inputs_list:
+		return user_input
+
+	while user_input not in valid_inputs_list:
+		print(f"  '{user_input}' is not a valid input")
+		print(f"  valid inputs include {valid_inputs_list}")
+		user_input = input(msg)
+
+	return user_input
+
 def mutate_question(questions_obj):
 	hello_from_qdriver({},[questions_obj])
 
@@ -31,8 +47,8 @@ def hello_from_litegrade():
 
 def init_student(assignment_name):
 	print("Please enter your name below")
-	first_name = input("First Name: ")
-	last_name = input("Last Name: ")
+	first_name = get_input("First Name: ", [])
+	last_name = get_input("Last Name: ", ["a", "b"])
 	id_number = "" #input("ID Number: ")
 	student_obj = {
 		"name": {

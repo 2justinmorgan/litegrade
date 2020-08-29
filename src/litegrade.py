@@ -26,5 +26,7 @@ def load_questions(json_fname):
 def mutate_question(questions_obj):
 	hello_from_qdriver({},[questions_obj])
 
+def hello_from_litegrade():
+	print("hello from litegrade function")
 
 

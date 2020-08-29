@@ -13,7 +13,8 @@ from modulemanager import \
 	print_err, \
 	safe_fopen, \
 	hello_from_qdriver, \
-	get_nested_value
+	get_nested_value, \
+	hand_in_assignment
 
 def load_questions(json_fname):
 
@@ -131,7 +132,9 @@ def ask(student_obj, question_name):
 
 	record_student_answer(question_name, student_answer, student_obj)
 
-
+def handin(assignment_name, student_obj):
+	hand_in_assignment(assignment_name, student_obj)
+	
 
 
 

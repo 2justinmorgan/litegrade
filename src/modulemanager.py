@@ -7,7 +7,10 @@
 from importlib import reload
 import commondriver
 import questiondriver
+import apidriver
 commondriver = reload(commondriver)
 questiondriver = reload(questiondriver)
+apidriver = reload(apidriver)
 from commondriver import print_err, safe_fopen
 from questiondriver import hello_from_qdriver, get_nested_value
+from apidriver import hand_in_assignment

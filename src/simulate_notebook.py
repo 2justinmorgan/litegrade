@@ -7,7 +7,7 @@
 from importlib import reload
 import litegrade
 litegrade = reload(litegrade)
-from litegrade import begin, ask
+from litegrade import begin, ask, handin
 #from litegrade import hello_from_litegrade
 
 #hello_from_litegrade()
@@ -16,4 +16,7 @@ student = begin("assignment A")
 
 ask(student, "apples_question")
 #ask(student, "cleverness_question")
+
+handin("assignment A", student)
+
 

@@ -1,4 +1,3 @@
-#!/home/jmorga27/Cal_Poly/Kurfess/litegrade/bin/python3
 
 # litegrade.py 
 #   This script contains student-interfacing functions that can be seen at the 

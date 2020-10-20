@@ -1,4 +1,3 @@
-#!/home/jmorga27/Cal_Poly/Kurfess/litegrade/bin/python3
 
 # modulemanager.py 
 #   This script manages all needed modules for litegrade.py, to increase 

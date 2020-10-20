@@ -1,4 +1,3 @@
-#!/home/jmorga27/Cal_Poly/Kurfess/litegrade/bin/python3
 
 # commondriver.py 
 #   This script contains functions that are to be used in multiple scripts

@@ -1,4 +1,3 @@
-#!/home/jmorga27/Cal_Poly/Kurfess/litegrade/bin/python3
 
 # questiondriver.py 
 #   This script reads a given questions dictionary/object to get info about 

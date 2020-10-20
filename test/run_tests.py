@@ -1,4 +1,3 @@
-#!/home/jmorga27/Cal_Poly/Kurfess/litegrade/bin/python3
 
 dir_of_code_to_test = "/home/jmorga27/Cal_Poly/Kurfess/litegrade/src"
 

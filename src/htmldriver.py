@@ -23,3 +23,24 @@ def create_question_choices_nodes( \
 	questions += "</ol>"
 	return questions
 
+def create_question_node( \
+	question_name_str, prompt_str, label_type_str, choices_lst):
+
+	question_node = create_node( \
+		"div",{"id":question_name_str,"class":"question-node"},"")
+
+	# add question prompt node
+	question_node = question_node[:question_node.find('>')+1] + \
+		create_node("div",{"class":"question-prompt"},prompt_str)
+
+	# add question choices
+	question_choices_node = \
+		create_node("div",{"class":"question-choices"},"")[:-6]
+	question_choices_node += create_question_choices_nodes( \
+		label_type_str, {"id":"","class":"choice"},choices_lst)
+	question_choices_node += "</div>"
+
+	question_node += question_choices_node + "</div>"
+	return question_node
+
+

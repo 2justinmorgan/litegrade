@@ -43,4 +43,19 @@ def create_question_node( \
 	question_node += question_choices_node + "</div>"
 	return question_node
 
+def get_javascript(question_name):
+	javascript = """
+	<script type="text/Javascript">
+		var question_node = document.getElementById("%s")
+		var kernel = IPython.notebook.kernel;
+		question_node.addEventListener("click",e=>{
+			var_name = "answer";
+			var_value = e.target.innerText;
+			command = var_name + " = '" + var_value + "'";
+			kernel.execute(command);
+		});
+	</script>
+	""" % (question_name)
+	return javascript
+
 

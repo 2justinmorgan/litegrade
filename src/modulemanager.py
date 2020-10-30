@@ -8,4 +8,15 @@ from commondriver import \
 	safe_fopen
 
 from questiondriver import \
-	hello_from_qdriver
+	hello_from_qdriver, \
+	get_nested_value, \
+	load_questions
+
+from htmldriver import \
+	get_html, \
+	get_javascript
+
+from IPython.display import \
+	HTML, \
+	display
+

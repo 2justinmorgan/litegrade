@@ -17,8 +17,8 @@ import questiondriver
 litegrade = reload(litegrade)
 questiondriver = reload(questiondriver)
 #commondriver = reload(commondriver)
-from litegrade import load_questions, mutate_question
-from questiondriver import get_nested_value, hello_from_qdriver
+from litegrade import mutate_question
+from questiondriver import load_questions, get_nested_value, hello_from_qdriver
 #from commondriver import *
 
 msg_prefix = "testing"

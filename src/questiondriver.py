@@ -3,8 +3,11 @@
 #   This script reads a given questions dictionary/object to get info about 
 #   a particular question
 
+import json
+
 from commondriver import \
-	print_err
+	print_err, \
+	safe_fopen
 
 def get_nested_value(nested_keys_and_indices_list, val_obj_or_list):
 
@@ -46,4 +49,16 @@ def hello_from_qdriver(obj, *argv):
 	nested_element = get_nested_value(["keyB",1], obj)
 	nested_element.update(key_BB = "New value added")
 	
+def load_questions(json_fname):
+
+	questions_fobj = safe_fopen("questions.json", 'r')
+
+	try:
+		questions_obj = json.load(questions_fobj)
+	except OSError as err:
+		print_err(f"{msg_prefix}: '{fname}' json load error")
+		print_err(f"(OS error below)\n{err}", callback=lambda: exit(1))
+
+	return questions_obj
+
 

@@ -1,11 +1,18 @@
 import pytest
-import htmldriver
 import importlib
+from modulemanager import \
+	create_node, \
+	create_question_choices_nodes, \
+	create_question_node
  
 @pytest.fixture(autouse=True)
 def before_each():
-	import htmldriver
-	htmldriver = importlib.reload(htmldriver)
+	import modulemanager
+	modulemanager = importlib.reload(modulemanager)
+	from modulemanager import \
+		create_node, \
+		create_question_choices_nodes, \
+		create_question_node
 
 @pytest.mark.parametrize(
 	"tag_str,attributes_obj,inner_text_str,expect",
@@ -22,8 +29,7 @@ def before_each():
 			'<li style="color:red;padding:2px;"></li>')
 	])
 def test_create_node(tag_str, attributes_obj, inner_text_str, expect):
-	assert expect == \
-		htmldriver.create_node(tag_str, attributes_obj, inner_text_str)
+	assert expect == create_node(tag_str, attributes_obj, inner_text_str)
 
 @pytest.mark.parametrize(
 	"label_type_str,choices_attributes_obj,choices_lst,expect",
@@ -59,7 +65,7 @@ def test_create_node(tag_str, attributes_obj, inner_text_str, expect):
 def test_create_question_choices_nodes( \
 	label_type_str, choices_attributes_obj, choices_lst, expect):
 	assert expect == \
-		htmldriver.create_question_choices_nodes( \
+		create_question_choices_nodes( \
 			label_type_str, choices_attributes_obj, choices_lst)
 
 @pytest.mark.parametrize(
@@ -115,7 +121,7 @@ def test_create_question_choices_nodes( \
 def test_create_question_node( \
 	question_name_str, prompt_str, label_type_str, choices_lst, expect):
 	assert expect == \
-		htmldriver.create_question_node( \
+		create_question_node( \
 			question_name_str, prompt_str, label_type_str, choices_lst)
 
 

@@ -13,6 +13,9 @@ from questiondriver import \
 	load_questions
 
 from htmldriver import \
+	create_node, \
+	create_question_choices_nodes, \
+	create_question_node, \
 	get_html, \
 	get_javascript
 

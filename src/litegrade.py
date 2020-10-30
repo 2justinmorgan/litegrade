@@ -5,10 +5,10 @@
 
 import json
 
-from importlib import reload
-import modulemanager
-modulemanager = reload(modulemanager)
-from modulemanager import print_err, safe_fopen, hello_from_qdriver
+from modulemanager import \
+	print_err, \
+	safe_fopen, \
+	hello_from_qdriver
 
 def load_questions(json_fname):
 

@@ -3,10 +3,8 @@
 #   This script reads a given questions dictionary/object to get info about 
 #   a particular question
 
-from importlib import reload
-import commondriver
-commondriver = reload(commondriver)
-from commondriver import print_err
+from commondriver import \
+	print_err
 
 def get_nested_value(nested_keys_and_indices_list, val_obj_or_list):
 

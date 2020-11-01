@@ -8,7 +8,10 @@ from modulemanager import \
 	get_html, \
 	get_javascript, \
 	HTML, \
-	display
+	display, \
+	get_notebook_env
+
+ENV = get_notebook_env()
 
 def mutate_question(questions_obj):
 	hello_from_qdriver({},[questions_obj])

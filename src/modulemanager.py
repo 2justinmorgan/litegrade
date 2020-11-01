@@ -5,7 +5,8 @@
 
 from commondriver import \
 	print_err, \
-	safe_fopen
+	safe_fopen, \
+	get_notebook_env
 
 from questiondriver import \
 	hello_from_qdriver, \

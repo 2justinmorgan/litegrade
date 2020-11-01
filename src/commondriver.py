@@ -30,5 +30,21 @@ def safe_fopen(fname, mode):
 
 	return fobj
 
+def get_notebook_env():
+	#
+	# possible envs:
+	#   "google-colab"
+	#   "standard-ipynb" (i.e. Jupyter)
+	#
+	try:
+		kernel_str = str(get_ipython())
+	except Exception as e:
+		print_err(f"(get_ipython() error)\n{e}", callback=lambda: exit())
+
+	if "google" in kernel_str.lower():
+		return "google-colab"
+
+	return "standard-ipynb"
+
 
 

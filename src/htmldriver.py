@@ -47,19 +47,30 @@ def create_question_node( \
 	question_node += question_choices_node + "</div>"
 	return question_node
 
-def get_javascript(question_name):
+def get_javascript(question_name, notebook_environment):
 	javascript = """
-	<script type="text/Javascript">
-		var question_node = document.getElementById("%s")
-		var kernel = IPython.notebook.kernel;
-		question_node.addEventListener("click",e=>{
-			var_name = "answer";
-			var_value = e.target.innerText;
-			command = var_name + " = '" + var_value + "'";
-			kernel.execute(command);
-		});
-	</script>
-	""" % (question_name)
+		<script type="text/Javascript">
+			document.querySelector("#{question_name} > .question-choices")
+				.onclick = e => {{
+		"""
+
+	# insert environment-specific JavaScript code for onclick event func body
+	if notebook_environment == "standard-ipynb":
+		javascript += """
+			cmd = '_lg_ans_["{question_name}"] = "'+e.target.innerText+'"';
+			IPython.notebook.kernel.execute(cmd);
+		"""
+	if notebook_environment == "google-colab":
+		javascript += """
+			google.colab.kernel.invokeFunction('{question_name}-id', [], {{}});
+			lgAns = e.target.innerText;
+		"""
+
+	javascript += """
+				}};
+		</script>
+	"""
+	javascript = javascript.format(question_name = question_name)
 	return javascript
 
 def get_html(question_name):

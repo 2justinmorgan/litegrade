@@ -57,7 +57,11 @@ def get_javascript(question_name, notebook_environment):
 	# insert environment-specific JavaScript code for onclick event func body
 	if notebook_environment == "standard-ipynb":
 		javascript += """
-			cmd = '_lg_ans_["{question_name}"] = "'+e.target.innerText+'"';
+			initializeCmd = 'if "litegrade" not in globals(): import litegrade';
+			IPython.notebook.kernel.execute(initializeCmd);
+			ans = e.target.innerText;
+			ansO = 'litegrade.answers_obj';
+			cmd = 'litegrade.record_answer("{question_name}","'+ans+'",'+ansO+')';
 			IPython.notebook.kernel.execute(cmd);
 		"""
 	if notebook_environment == "google-colab":

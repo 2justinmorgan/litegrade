@@ -11,7 +11,8 @@ from commondriver import \
 from questiondriver import \
 	hello_from_qdriver, \
 	get_nested_value, \
-	load_questions
+	load_questions, \
+	record_answer
 
 from htmldriver import \
 	create_node, \

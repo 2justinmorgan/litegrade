@@ -61,4 +61,9 @@ def load_questions(json_fname):
 
 	return questions_obj
 
+def record_answer(question_name, answer_str, answers_obj):
+	answers_lst = answers_obj.get(question_name, [])
+	answers_lst.append(answer_str)
+	answers_obj[question_name] = answers_lst
+
 

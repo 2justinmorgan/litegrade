@@ -9,14 +9,17 @@ from modulemanager import \
 	get_javascript, \
 	HTML, \
 	display, \
-	get_notebook_env
+	get_notebook_env, \
+	record_answer
 
 ENV = get_notebook_env()
+answers_obj = {}
 
 def mutate_question(questions_obj):
 	hello_from_qdriver({},[questions_obj])
 
 def ask(question_name):
+
 	html_str = get_html(question_name)
 	javascript_str = get_javascript(question_name, ENV)
 	display(HTML(html_str + javascript_str))

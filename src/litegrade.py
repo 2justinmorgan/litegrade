@@ -24,3 +24,10 @@ def ask(question_name):
 	javascript_str = get_javascript(question_name, ENV)
 	display(HTML(html_str + javascript_str))
 
+	# register js-to-py callback for Google Colab notebooks
+	if ENV == "google-colab":
+		from google.colab.output import register_callback, eval_js
+		register_callback( \
+			question_name+"-id", \
+			lambda: record_answer(question_name, eval_js('lgAns'), answers_obj))
+

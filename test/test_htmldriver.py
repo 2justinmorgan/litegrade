@@ -35,32 +35,30 @@ def test_create_node(tag_str, attributes_obj, inner_text_str, expect):
 	"label_type_str,choices_attributes_obj,choices_lst,expect",
 	[
 		(
-			"A",
+			"checkbox",
 			{},
 			["choice1","choice2","choice3"],
-			('<ol type="A">'
-				'<li id="choice-1">'
-					'choice1'
-				'</li>'
-				'<li id="choice-2">'
-					'choice2'
-				'</li>'
-				'<li id="choice-3">'
-					'choice3'
-				'</li>'
-			'</ol>')),
+			(
+				'<input id="choice-1" type="checkbox" name="choice"></input>'
+				'<label for="choice-1">choice1</label>'
+				'<br>'
+				'<input id="choice-2" type="checkbox" name="choice"></input>'
+				'<label for="choice-2">choice2</label>'
+				'<br>'
+				'<input id="choice-3" type="checkbox" name="choice"></input>'
+				'<label for="choice-3">choice3</label>'
+				'<br>')),
 		(
-			"i",
-			{"class":"some-class","style":"background:yellow;"},
+			"radio",
+			{},
 			["True","False"],
-			('<ol type="i">'
-				'<li class="some-class" style="background:yellow;" id="choice-1">'
-					'True'
-				'</li>'
-				'<li class="some-class" style="background:yellow;" id="choice-2">'
-					'False'
-				'</li>'
-			'</ol>'))
+			(
+				'<input id="choice-1" type="radio" name="choice"></input>'
+				'<label for="choice-1">True</label>'
+				'<br>'
+				'<input id="choice-2" type="radio" name="choice"></input>'
+				'<label for="choice-2">False</label>'
+				'<br>'))
 	])
 def test_create_question_choices_nodes( \
 	label_type_str, choices_attributes_obj, choices_lst, expect):

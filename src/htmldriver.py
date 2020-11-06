@@ -17,34 +17,28 @@ def create_node(tag_str, attributes_obj, inner_text_str):
 	
 def create_question_choices_nodes( \
 	label_type_str, choices_attributes_obj, choices_lst):
-	questions = f"<ol type=\"{label_type_str}\">"
-	question_num = 0
+	choices = ""
+	choice_num = 0
 	for choice_str in choices_lst:
-		question_num += 1
-		question_num_str = "choice-" + str(question_num)
-		choices_attributes_obj["id"] = question_num_str
-		questions += create_node("li",choices_attributes_obj,choice_str)
-	questions += "</ol>"
-	return questions
+		choice_num += 1
+		choice_num_str = "choice-" + str(choice_num)
+		input_attributes_obj = {
+			"id": choice_num_str,
+			"type": label_type_str,
+			"name": "choice"
+		}
+		label_attributes_obj = { "for": choice_num_str }
+		choices += create_node("input",input_attributes_obj,"")
+		choices += create_node("label",label_attributes_obj,choice_str)
+		choices += "<br>"
+	return choices
 
 def create_question_node( \
 	question_name_str, prompt_str, label_type_str, choices_lst):
 
-	question_node = create_node( \
-		"div",{"id":question_name_str,"class":"question-node"},"")
 
-	# add question prompt node
-	question_node = question_node[:question_node.find('>')+1] + \
-		create_node("div",{"class":"question-prompt"},prompt_str)
 
-	# add question choices
-	question_choices_node = \
-		create_node("div",{"class":"question-choices"},"")[:-6]
-	question_choices_node += create_question_choices_nodes( \
-		label_type_str, {"id":"","class":"choice"},choices_lst)
-	question_choices_node += "</div>"
 
-	question_node += question_choices_node + "</div>"
 	return question_node
 
 def get_javascript(question_name, notebook_environment):

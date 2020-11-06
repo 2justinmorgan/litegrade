@@ -56,7 +56,7 @@ def create_question_node( \
 
 	return question_node
 
-def get_javascript(question_name, notebook_environment):
+def get_click_javascript(question_name, notebook_environment):
 	javascript = """
 		<script type="text/Javascript">
 			document.querySelector("#{question_name} > .question-choices")

@@ -36,8 +36,23 @@ def create_question_choices_nodes( \
 def create_question_node( \
 	question_name_str, prompt_str, label_type_str, choices_lst):
 
+	# question prompt node
+	prompt_node = create_node("div",{"class":"question-prompt"},prompt_str)
 
+	# question choices
+	inner_nodes = create_question_choices_nodes(label_type_str,{},choices_lst)
+	choices_node = create_node("div",{"class":"question-choices"},inner_nodes)
 
+	# submit button
+	submit_button = \
+		create_node("button",{"id":"submit-button","type":"submit"},"Submit")
+
+	# insert innerHTML into question_node
+	question_node_inner_html = prompt_node + choices_node + submit_button
+	question_node = create_node( \
+		"div", \
+		{"id":question_name_str,"class":"question-node"}, \
+		question_node_inner_html)
 
 	return question_node
 

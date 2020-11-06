@@ -72,48 +72,50 @@ def test_create_question_choices_nodes( \
 		(
 			"this_question_name",
 			"This prompt is funny",
-			"i",
+			"radio",
 			["True","False"],
 			('<div id="this_question_name" class="question-node">'
 				'<div class="question-prompt">'
 					'This prompt is funny'
 				'</div>'
 				'<div class="question-choices">'
-					'<ol type="i">'
-						'<li id="choice-1" class="choice">'
-							'True'
-						'</li>'
-						'<li id="choice-2" class="choice">'
-							'False'
-						'</li>'
-					'</ol>'
+					'<input id="choice-1" type="radio" name="choice"></input>'
+					'<label for="choice-1">True</label>'
+					'<br>'
+					'<input id="choice-2" type="radio" name="choice"></input>'
+					'<label for="choice-2">False</label>'
+					'<br>'
 				'</div>'
+				'<button id="submit-button" type="submit">'
+					'Submit'
+				'</button>'
 			'</div>')),
 		(
 			"sample_question_name",
 			"This is a prompt",
-			"a",
+			"checkbox",
 			["Sure","Yeah man","OK","All the above"],
 			('<div id="sample_question_name" class="question-node">'
 				'<div class="question-prompt">'
 					'This is a prompt'
 				'</div>'
 				'<div class="question-choices">'
-					'<ol type="a">'
-						'<li id="choice-1" class="choice">'
-							'Sure'
-						'</li>'
-						'<li id="choice-2" class="choice">'
-							'Yeah man'
-						'</li>'
-						'<li id="choice-3" class="choice">'
-							'OK'
-						'</li>'
-						'<li id="choice-4" class="choice">'
-							'All the above'
-						'</li>'
-					'</ol>'
+					'<input id="choice-1" type="checkbox" name="choice"></input>'
+					'<label for="choice-1">Sure</label>'
+					'<br>'
+					'<input id="choice-2" type="checkbox" name="choice"></input>'
+					'<label for="choice-2">Yeah man</label>'
+					'<br>'
+					'<input id="choice-3" type="checkbox" name="choice"></input>'
+					'<label for="choice-3">OK</label>'
+					'<br>'
+					'<input id="choice-4" type="checkbox" name="choice"></input>'
+					'<label for="choice-4">All the above</label>'
+					'<br>'
 				'</div>'
+				'<button id="submit-button" type="submit">'
+					'Submit'
+				'</button>'
 			'</div>'))
 	])
 def test_create_question_node( \

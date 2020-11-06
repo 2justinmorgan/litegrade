@@ -3,7 +3,7 @@
 		"apples_question": {
 			"question_type": "multiple-choice",
 			"prompt": "How do you like them apples?",
-			"choices_label_type": "letters",
+			"choices_label_type": "checkbox",
 			"choices": [
 				{
 					"description": "They're great!",
@@ -27,7 +27,7 @@
 		"gravy_question": {
 			"question_type": "multiple-choice",
 			"prompt": "Do you like gravy in your cereal?",
-			"choices_label_type": "numbers",
+			"choices_label_type": "radio",
 			"choices": [
 				{
 					"description": "Obsolutely not!",

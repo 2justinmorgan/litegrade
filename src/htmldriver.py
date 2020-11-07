@@ -7,6 +7,21 @@ from modulemanager import \
 	load_questions, \
 	get_nested_value
 
+ENV_JS = {
+	"standard-ipynb": """
+		initializeCmd = 'if "litegrade" not in globals(): import litegrade';
+		IPython.notebook.kernel.execute(initializeCmd);
+		ans = selections;
+		ansO = 'litegrade.answers_obj';
+		cmd = 'litegrade.record_answer("{question_name}","'+ans+'",'+ansO+')';
+		IPython.notebook.kernel.execute(cmd);
+	""",
+	"google-colab": """
+		google.colab.kernel.invokeFunction('{question_name}-id', [], {{}});
+		lgAns = selections;
+	"""
+}
+
 def create_node(tag_str, attributes_obj, inner_text_str):
 	node = f"<{tag_str}"
 	for attribute_name in attributes_obj:
@@ -74,29 +89,14 @@ def get_javascript(question_name, notebook_environment):
 				}}
 				// remove trailing " | "
 				selections = selections.slice(0,-3);
-		"""
-
-	# insert environment-specific JavaScript code for onclick event func body
-	if notebook_environment == "standard-ipynb":
-		javascript += """
-			initializeCmd = 'if "litegrade" not in globals(): import litegrade';
-			IPython.notebook.kernel.execute(initializeCmd);
-			ans = selections;
-			ansO = 'litegrade.answers_obj';
-			cmd = 'litegrade.record_answer("{question_name}","'+ans+'",'+ansO+')';
-			IPython.notebook.kernel.execute(cmd);
-		"""
-	if notebook_environment == "google-colab":
-		javascript += """
-			google.colab.kernel.invokeFunction('{question_name}-id', [], {{}});
-			lgAns = selections;
-		"""
-
-	javascript += """
+				{env_specific_javascript}
 			}}
 		</script>
-	"""
-	javascript = javascript.format(question_name = question_name)
+		"""
+	javascript = javascript.format( \
+		question_name = question_name, \
+		env_specific_javascript = \
+			ENV_JS[notebook_environment].format(question_name = question_name))
 
 	return javascript
 
@@ -141,5 +141,6 @@ def get_html(question_name):
 
 	return create_question_node( \
 		question_name, prompt_str, label_type_str, choices_lst)
+
 
 

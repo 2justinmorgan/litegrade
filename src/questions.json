@@ -3,7 +3,7 @@
 		"apples_question": {
 			"question_type": "multiple-choice",
 			"prompt": "How do you like them apples?",
-			"choices_label_type": "letters",
+			"choices_label_type": "checkbox",
 			"choices": [
 				{
 					"description": "They're great!",
@@ -27,7 +27,7 @@
 		"gravy_question": {
 			"question_type": "multiple-choice",
 			"prompt": "Do you like gravy in your cereal?",
-			"choices_label_type": "numbers",
+			"choices_label_type": "radio",
 			"choices": [
 				{
 					"description": "Obsolutely not!",
@@ -44,11 +44,21 @@
 			],
 			"correct_choice": 0
 		},
-		"cleverness_question": {
-			"question_type": "true-or-false",
-			"prompt": "Are these questions clever?",
-			"correct_answer": "true",
-			"explaination": "They're so good, an explaination is not needed"
+		"tf_question": {
+			"question_type": "true-false",
+			"prompt": "This is a clever prompt.",
+			"choices_label_type": "radio",
+			"choices": [
+				{
+					"description": "True",
+					"explanation": "It's genius"
+				},
+				{
+					"description": "False",
+					"explanation": "It's still genius"
+				}
+			],
+			"correct_choice": 0
 		}
 	}
 }

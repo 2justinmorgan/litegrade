@@ -100,36 +100,6 @@ def get_javascript(question_name, notebook_environment):
 
 	return javascript
 
-def get_click_javascript(question_name, notebook_environment):
-	javascript = """
-		<script type="text/Javascript">
-			document.querySelector("#{question_name} > .question-choices")
-				.onclick = e => {{
-		"""
-
-	# insert environment-specific JavaScript code for onclick event func body
-	if notebook_environment == "standard-ipynb":
-		javascript += """
-			initializeCmd = 'if "litegrade" not in globals(): import litegrade';
-			IPython.notebook.kernel.execute(initializeCmd);
-			ans = e.target.innerText;
-			ansO = 'litegrade.answers_obj';
-			cmd = 'litegrade.record_answer("{question_name}","'+ans+'",'+ansO+')';
-			IPython.notebook.kernel.execute(cmd);
-		"""
-	if notebook_environment == "google-colab":
-		javascript += """
-			google.colab.kernel.invokeFunction('{question_name}-id', [], {{}});
-			lgAns = e.target.innerText;
-		"""
-
-	javascript += """
-				}};
-		</script>
-	"""
-	javascript = javascript.format(question_name = question_name)
-	return javascript
-
 def get_html(question_name):
 	questions_obj = load_questions("questions.json")
 	question_obj = get_nested_value(["questions",question_name],questions_obj)

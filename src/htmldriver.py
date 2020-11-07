@@ -59,8 +59,10 @@ def create_question_node( \
 	choices_node = create_node("div",{"class":"question-choices"},inner_nodes)
 
 	# submit button
-	submit_button = \
-		create_node("button",{"id":"submit-button","type":"submit"},"Submit")
+	submit_button = create_node( \
+		"button", \
+		{"class":"submit-button","type":"submit","qname":question_name_str}, \
+		"Submit")
 
 	# insert innerHTML into question_node
 	question_node_inner_html = prompt_node + choices_node + submit_button

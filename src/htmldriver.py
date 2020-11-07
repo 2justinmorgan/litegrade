@@ -76,16 +76,23 @@ def create_question_node( \
 def get_javascript(question_name, notebook_environment):
 	javascript = """
 		<script type="text/Javascript">
-			var questionNode = document.querySelector("#{question_name}");
-			var choicesNode = questionNode.querySelector(".question-choices");
-			var submitButton = questionNode.querySelector("#submit-button");
-			submitButton.onclick = e => {{
-				inputs = choicesNode.querySelectorAll("input");
+			if (typeof qNodes === 'undefined')  qNodes = {{}};
+			if (typeof sButtons === 'undefined') sButtons = {{}};
+			if (typeof cNodes === 'undefined') cNodes = {{}};
+			qName = "{question_name}";
+			qNodes[qName] = document.querySelector('#'+qName);
+			cNodes[qName] = qNodes[qName].querySelector(".question-choices");
+			sButtons[qName] = qNodes[qName]
+				.querySelector('button[qname="'+qName+'"]');
+			sButtons[qName].onclick = e => {{
+				thisqName = e.target.getAttribute("qname");
+				inputs = cNodes[thisqName].querySelectorAll("input");
 				// concatenation of all selected answers upon clicking "Submit"
 				selections = "";
 				for (var i=0; i<inputs.length; i++) {{
 					var label =
-						choicesNode.querySelector("label[for='"+inputs[i].id+"']");
+						cNodes[thisqName]
+							.querySelector("label[for='"+inputs[i].id+"']");
 					if (inputs[i].checked)
 						selections += label.innerText + " | ";
 				}}

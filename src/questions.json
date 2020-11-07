@@ -44,11 +44,21 @@
 			],
 			"correct_choice": 0
 		},
-		"cleverness_question": {
-			"question_type": "true-or-false",
-			"prompt": "Are these questions clever?",
-			"correct_answer": "true",
-			"explaination": "They're so good, an explaination is not needed"
+		"tf_question": {
+			"question_type": "true-false",
+			"prompt": "This is a clever prompt.",
+			"choices_label_type": "radio",
+			"choices": [
+				{
+					"description": "True",
+					"explanation": "It's genius"
+				},
+				{
+					"description": "False",
+					"explanation": "It's still genius"
+				}
+			],
+			"correct_choice": 0
 		}
 	}
 }

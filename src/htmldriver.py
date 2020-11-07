@@ -56,6 +56,50 @@ def create_question_node( \
 
 	return question_node
 
+def get_javascript(question_name, notebook_environment):
+	javascript = """
+		<script type="text/Javascript">
+			var questionNode = document.querySelector("#{question_name}");
+			var choicesNode = questionNode.querySelector(".question-choices");
+			var submitButton = questionNode.querySelector("#submit-button");
+			submitButton.onclick = e => {{
+				inputs = choicesNode.querySelectorAll("input");
+				// concatenation of all selected answers upon clicking "Submit"
+				selections = "";
+				for (var i=0; i<inputs.length; i++) {{
+					var label =
+						choicesNode.querySelector("label[for='"+inputs[i].id+"']");
+					if (inputs[i].checked)
+						selections += label.innerText + " | ";
+				}}
+				// remove trailing " | "
+				selections = selections.slice(0,-3);
+		"""
+
+	# insert environment-specific JavaScript code for onclick event func body
+	if notebook_environment == "standard-ipynb":
+		javascript += """
+			initializeCmd = 'if "litegrade" not in globals(): import litegrade';
+			IPython.notebook.kernel.execute(initializeCmd);
+			ans = selections;
+			ansO = 'litegrade.answers_obj';
+			cmd = 'litegrade.record_answer("{question_name}","'+ans+'",'+ansO+')';
+			IPython.notebook.kernel.execute(cmd);
+		"""
+	if notebook_environment == "google-colab":
+		javascript += """
+			google.colab.kernel.invokeFunction('{question_name}-id', [], {{}});
+			lgAns = selections;
+		"""
+
+	javascript += """
+			}}
+		</script>
+	"""
+	javascript = javascript.format(question_name = question_name)
+
+	return javascript
+
 def get_click_javascript(question_name, notebook_environment):
 	javascript = """
 		<script type="text/Javascript">

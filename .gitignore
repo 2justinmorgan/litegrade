@@ -11,3 +11,7 @@ test/litegrade.py
 test/questiondriver.py
 test/modulemanager.py
 test/htmldriver.py
+
+# for Python packaging
+pkg/README.md
+pkg/test

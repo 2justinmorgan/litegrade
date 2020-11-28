@@ -18,10 +18,10 @@ You can also:
 
 ### How to Use
 
-Install the library into your notebook
+Install the library 
 
 ```py
-[ ] !curl https://www.justinleemorgan.com/litegrade > litegrade.zip; unzip litegrade.zip
+[ ] !pip install litegrade
 ```
 Import the **ask** library function
 
@@ -54,3 +54,10 @@ To run tests
 ```sh
 $ pytest test/
 ```
+
+To deploy to PyPi
+
+```sh
+$ . package/release
+```
+

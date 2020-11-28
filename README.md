@@ -54,3 +54,10 @@ To run tests
 ```sh
 $ pytest test/
 ```
+
+To deploy to PyPi
+
+```sh
+$ . package/release
+```
+

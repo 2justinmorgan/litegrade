@@ -52,5 +52,5 @@ $ ./dev_setup.sh
 To run tests
 
 ```sh
-$ test/pytest
+$ pytest test/
 ```

@@ -1,0 +1,13 @@
+
+rm -rf build/* litegrade.egg-info/;
+python3 setup.py sdist bdist_wheel;
+
+version=$(cat VERSION);
+files=$(find dist/ | grep "litegrade-$version");
+python3 -m twine upload $files;
+
+if [[ $? -eq 0 ]]; then
+	echo -e "\nGit:";
+	git add VERSION $files;
+	git commit -m "Released version litegrade-$version";
+fi

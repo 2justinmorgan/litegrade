@@ -5,7 +5,7 @@
 
 import json
 
-from commondriver import \
+from .commondriver import \
 	print_err, \
 	safe_fopen
 

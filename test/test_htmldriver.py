@@ -1,15 +1,13 @@
 import pytest
 import importlib
-from modulemanager import \
+from .htmldriver import \
 	create_node, \
 	create_question_choices_nodes, \
 	create_question_node
  
 @pytest.fixture(autouse=True)
 def before_each():
-	import modulemanager
-	modulemanager = importlib.reload(modulemanager)
-	from modulemanager import \
+	from .htmldriver import \
 		create_node, \
 		create_question_choices_nodes, \
 		create_question_node

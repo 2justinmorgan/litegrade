@@ -3,14 +3,12 @@
 #   This script contains student-interfacing functions that can be seen at the 
 #   notebook level
 
-from modulemanager import \
-	hello_from_qdriver, \
-	get_html, \
-	get_javascript, \
-	HTML, \
-	display, \
-	get_notebook_env, \
-	record_answer
+from .commondriver import get_notebook_env
+from .questiondriver import hello_from_qdriver
+from .questiondriver import record_answer
+from .htmldriver import get_html
+from .htmldriver import get_javascript
+from IPython.display import HTML, display
 
 ENV = get_notebook_env()
 answers_obj = {}

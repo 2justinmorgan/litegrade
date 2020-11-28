@@ -3,7 +3,7 @@
 #   This script creates and edits string representations of html elements
 #   that will later be rendered and displayed via IPython
 
-from modulemanager import \
+from .questiondriver import \
 	load_questions, \
 	get_nested_value
 

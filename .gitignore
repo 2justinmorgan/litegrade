@@ -5,7 +5,7 @@ __pycache__
 # swap files
 *.swp
 
-# sym links to src/
+# sym links to source/
 test/commondriver.py
 test/notebookdriver.py
 test/questiondriver.py

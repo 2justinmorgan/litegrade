@@ -14,3 +14,10 @@ test/htmldriver.py
 # for Python packaging
 pkg/README.md
 pkg/test
+pkg/build/
+pkg/*.egg-info/
+pkg/litegrade/commondriver.py
+pkg/litegrade/notebookdriver.py
+pkg/litegrade/questiondriver.py
+pkg/litegrade/htmldriver.py
+

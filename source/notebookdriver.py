@@ -1,5 +1,5 @@
 
-# litegrade.py 
+# notebookdriver.py 
 #   This script contains student-interfacing functions that can be seen at the 
 #   notebook level
 
@@ -9,12 +9,18 @@ from .questiondriver import record_answer
 from .htmldriver import get_html
 from .htmldriver import get_javascript
 from IPython.display import HTML, display
+from urllib import request
 
 ENV = get_notebook_env()
 answers_obj = {}
 
 def mutate_question(questions_obj):
 	hello_from_qdriver({},[questions_obj])
+
+def begin(questions_filename_hash):
+	url = "https://justinleemorgan.com/api/litegrade/questions/" + \
+		str(questions_filename_hash)
+	request.urlretrieve(url,"questions.json")
 
 def ask(question_name):
 

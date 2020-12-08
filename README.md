@@ -1,4 +1,4 @@
-# litegrade
+# **litegrade**
 
 **litegrade** is a Python library that gives IPython notebook authors a simple and user friendly method of evaluating the learning retention of notebook readers. A few functionalities include:
 
@@ -20,22 +20,39 @@ You can also:
 
 Install the library 
 
+
 ```py
 [ ] !pip install litegrade
 ```
-Import the **ask** library function
+
+Import the **begin** and **ask** library functions
+
 
 ```py
-[ ] from litegrade import ask
+[ ] from litegrade import begin, ask
 ```
-![alt text](https://www.justinleemorgan.com/api/litegrade/submit_button "Example use of the ask function")
+
+Invoke the **begin** function to get the "Demo" assignment questions that will be asked
+
+
+```py
+[ ] begin("Demo")
+```
+
 
 Invoke the **ask** function to ask the reader a question about the notebook content
+
 
 ```py
 [ ] ask("Recursion question")
 ```
-![alt text](https://www.justinleemorgan.com/api/litegrade/recursion_question "Example use of the ask function")
+
+Multiple checkbox selections is another available question format
+
+
+```py
+[ ] ask("Multi-selection question")
+```
 
 ### Development
 
